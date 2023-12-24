@@ -1,12 +1,15 @@
 import { FC } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes";
+import { ErrorBoundary } from "./utils";
 
 const App: FC = () => {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </ErrorBoundary>
   );
 };
 

@@ -39,7 +39,7 @@ const WeatherSwitchDay: FC = () => {
     `}
         >
           <span
-            className="font-medium  text-xl md:text-[32px] uppercase leading-9 tracking-wider cursor-pointer"
+            className="font-medium font-roboto  text-xl md:text-[32px] uppercase leading-9 tracking-wider cursor-pointer"
             onClick={() =>
               handleChangeDay({
                 field: WEATHER_DATE_TABS_QUERY_KEY,
