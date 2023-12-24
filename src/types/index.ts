@@ -1,3 +1,7 @@
+export interface IMeta {
+  title: string;
+}
+
 export interface IWeather {
   description: string;
   icon: string;

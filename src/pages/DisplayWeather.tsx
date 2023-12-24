@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { DEFAULT_CITY, WEATHER_DATE_TABS_QUERY_KEY } from "../constants";
 import { IAlertState, IWeatherState } from "../types";
 
-import { Alert, ProgressBarLoader } from "../partials";
+import { Alert, Meta, ProgressBarLoader } from "../partials";
 
 import useAlert from "../helper/useAlert";
 import {
@@ -51,35 +51,38 @@ const DisplayWeather = () => {
   }, [isError, message]);
 
   return (
-    <section className="bg-colorBlack h-full min-h-screen ">
-      <div className="2xl:container 2xl:mx-auto px-5 md:px-0 pb-10">
-        {isLoading && <ProgressBarLoader isLoading={isLoading} />}
-        <WeatherHeader title="Hotlify" />
-        <div className="mt-4 md:mt-12 ">
-          <WeatherSwitchTemp />
-        </div>
-        <div className="flex items-center justify-center  md:-mt-10">
-          <WeatherSwitchDay />
-        </div>
-        <Search />
+    <>
+      <Meta title="Weather" />
+      <section className="bg-colorBlack h-full min-h-screen ">
+        <div className="2xl:container 2xl:mx-auto px-5 md:px-0 pb-10">
+          {isLoading && <ProgressBarLoader isLoading={isLoading} />}
+          <WeatherHeader title="Hotlify" />
+          <div className="mt-4 md:mt-12 ">
+            <WeatherSwitchTemp />
+          </div>
+          <div className="flex items-center justify-center  md:-mt-10">
+            <WeatherSwitchDay />
+          </div>
+          <Search />
 
-        {isLoading && !data ? (
-          <SkeletonWeatherCard />
-        ) : (
-          data && <WeatherCard data={data} />
+          {isLoading && !data ? (
+            <SkeletonWeatherCard />
+          ) : (
+            data && <WeatherCard data={data} />
+          )}
+          <WeatherRecents />
+        </div>
+
+        {alertMsg && (
+          <Alert
+            message={alertMsg}
+            onClose={() => {
+              dispatch(RESET_WEATHER_STATE());
+            }}
+          />
         )}
-        <WeatherRecents />
-      </div>
-
-      {alertMsg && (
-        <Alert
-          message={alertMsg}
-          onClose={() => {
-            dispatch(RESET_WEATHER_STATE());
-          }}
-        />
-      )}
-    </section>
+      </section>
+    </>
   );
 };
 

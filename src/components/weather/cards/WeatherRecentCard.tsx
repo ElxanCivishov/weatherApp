@@ -33,7 +33,7 @@ const WeatherRecentCard: FC<WeatherProps> = ({ data }) => {
           <div className="z-20 w-16 h-12 md:w-24 md:h-16 ">
             <img
               src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
-              alt=""
+              alt="weather_temp_icon"
               className="w-full h-full object-cover"
             />
           </div>

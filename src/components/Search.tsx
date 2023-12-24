@@ -61,7 +61,7 @@ const Search: FC = () => {
         <button type="submit" className="outline-none border-none p-2">
           <img
             src={SearchSvg}
-            alt=""
+            alt="search"
             className="w-8 h-8 md:w-[45px] md:h-[45px]  object-contain"
           />
         </button>
