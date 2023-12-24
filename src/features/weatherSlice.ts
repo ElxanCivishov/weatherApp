@@ -1,8 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance, axiosInstanceForWeekDays } from "../app/config";
+import { axiosInstance } from "../app/config";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { IWeatherState } from "../types";
-import { WEATHER_DATA_WEEK_DAY_COUNT } from "../constants";
+import {
+  WEATHER_DATA_WEEK_DAYS,
+  WEATHER_DATA_WEEK_DAYS_COUNT,
+} from "../constants";
+import axios from "axios";
 
 const appid = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
@@ -29,8 +33,8 @@ export const getWeatherDataWeekDays = createAsyncThunk(
   "weather/getWeatherDataWeekDays",
   async (query: string, thunkAPI) => {
     try {
-      const response = await axiosInstanceForWeekDays.get(
-        `?q=${query}&appid=${appid}&cnt=${WEATHER_DATA_WEEK_DAY_COUNT}`
+      const response = await axios.get(
+        `${WEATHER_DATA_WEEK_DAYS}?q=${query}&appid=${appid}&cnt=${WEATHER_DATA_WEEK_DAYS_COUNT}`
       );
 
       return response.data;

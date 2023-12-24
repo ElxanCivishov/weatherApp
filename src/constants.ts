@@ -5,7 +5,7 @@ export const WEATHER_SEARCH_OPTIONS_URL =
 export const WEATHER_DATA_WEEK_DAYS =
   "https://api.openweathermap.org/data/2.5/forecast";
 
-export const WEATHER_DATA_WEEK_DAY_COUNT = 2;
+export const WEATHER_DATA_WEEK_DAYS_COUNT = 2;
 export const WEATHER_SEARCH_OPTIONS_LIMIT = 5;
 export const DEFAULT_CITY = "Bakı";
 export const DEFAULT_TIMEOUT_ALERT = 2000;
