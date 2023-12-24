@@ -53,7 +53,7 @@ const Search: FC = () => {
     <form onSubmit={submitHandler}>
       <div className="flex items-center justify-between gap-1 py-1 bg-colorLight rounded mt-5 md:mt-11 pl-3 pr-1 md:pl-8 md:pr-[10px] w-full md:w-[711px] h-14 md:h-[66px] mx-auto">
         <input
-          className="w-full focus:outline-none text-colorTextBlack font-light leading-normal bg-transparent border-none text-xs sm:text-sm md:text-2xl lg:md:text-[30px]"
+          className="w-full focus:outline-none text-colorTextBlack font-light leading-normal bg-transparent border-none text-xl md:text-2xl lg:md:text-[30px]"
           value={city}
           onChange={changeHandler}
           placeholder="Enter city or country name..."
