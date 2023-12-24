@@ -5,7 +5,7 @@ import AppRoutes from "./routes";
 const App: FC = () => {
   return (
     <Router>
-      <AppRoutes />;
+      <AppRoutes />
     </Router>
   );
 };

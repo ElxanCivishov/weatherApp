@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = `https://api.openweathermap.org/data/2.5/weather`;
+import { API_URL } from "../constants";
 
 export const axiosInstance = axios.create({
   baseURL: API_URL,

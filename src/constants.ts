@@ -1,9 +1,14 @@
+export const API_URL = "https://api.openweathermap.org/data/2.5/weather";
+export const WEATHER_SEARCH_OPTIONS_URL =
+  "https://api.openweathermap.org/geo/1.0/direct";
+
+export const WEATHER_SEARCH_OPTIONS_LIMIT = 5;
+
 export const DEFAULT_CITY = "Bakı";
 export const DEFAULT_TIMEOUT_ALERT = 2000;
 
-// recent Weather
-export const RECENT_WEATHER_STORAGE_KEY = "RECENT_WEATHER_DATA";
-export const RECENT_WEATHER_MAX_SIZE = 5;
+//weather query
+export const WEATHER_QUERY_KEY = "query";
 
 //weather temperature
 export const WEATHER_TEMPERATURE_QUERY_KEY = "units";
@@ -12,17 +17,22 @@ export const WEATHER_TEMPERATURE_FAHRENHEIT = "imperial";
 
 // date tabs
 export const WEATHER_DATE_TABS_QUERY_KEY = "dt";
-export const WEATHER_DATE_TABS_TOMORROW_VALUE_PLUS_TODAY = 1;
+export const WEATHER_DATE_TABS_TODAY = 0;
+export const WEATHER_DATE_TABS_TOMORROW = 1;
 
 export const dateTabs = [
   {
     id: 1,
     title: "Today",
-    value: "",
+    value: 0,
   },
   {
     id: 2,
     title: "Tomorrow",
-    value: WEATHER_DATE_TABS_TOMORROW_VALUE_PLUS_TODAY,
+    value: WEATHER_DATE_TABS_TOMORROW,
   },
 ];
+
+// recent Weather
+export const RECENT_WEATHER_STORAGE_KEY = "RECENT_WEATHER_DATA";
+export const DEFAULT_RECENT_WEATHER_MAX_SIZE = 5;

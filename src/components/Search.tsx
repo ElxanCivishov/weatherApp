@@ -4,7 +4,7 @@ import SearchSvg from "../assets/images/icon _search_.svg";
 import { Alert } from "../partials";
 import useAlert from "../helper/useAlert";
 import { IAlertState } from "../types";
-import { recentWeatherData } from "../helper/recentWeatherData";
+import { getAndSetRecentWeatherData } from "../helper/getAndSetRecentWeatherData";
 import { getWeatherData } from "../features/weatherSlice";
 
 const Search: FC = () => {
@@ -24,11 +24,11 @@ const Search: FC = () => {
     e.preventDefault();
 
     if (!city) {
-      showAlert("Please enter a city or country name");
+      showAlert("Enter city or country name");
     } else {
       const data = await dispatch(getWeatherData(city));
       if (data.payload.cod === 200) {
-        recentWeatherData(data.payload);
+        getAndSetRecentWeatherData(data.payload);
       }
       setCity("");
     }
@@ -36,18 +36,18 @@ const Search: FC = () => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="flex items-center justify-between gap-1 p-1 bg-colorLight rounded mt-11 pl-[33px] pr-[10px] w-full md:w-[711px] h-[66px] mx-auto">
+      <div className="flex items-center justify-between gap-1 py-1 bg-colorLight rounded mt-5 md:mt-11 pl-8 pr-[10px] w-full md:w-[711px] h-14 md:h-[66px] mx-auto">
         <input
-          className="w-full focus:outline-none text-colorTextBlack font-light leading-normal bg-transparent border-none text-[30px]"
+          className="w-full focus:outline-none text-colorTextBlack font-light leading-normal bg-transparent border-none text-2xl md:text-[30px]"
           value={city}
           onChange={changeHandler}
           placeholder="Enter city or country name..."
         />
-        <button type="submit" className="outline-none border-0 p-2">
+        <button type="submit" className="outline-none border-none p-2">
           <img
             src={SearchSvg}
             alt=""
-            className="w-[45px] h-[45px]  object-contain"
+            className="w-8 h-8 md:w-[45px] md:h-[45px]  object-contain"
           />
         </button>
       </div>

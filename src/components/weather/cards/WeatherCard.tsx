@@ -4,6 +4,12 @@ import locationSvg from "../../../assets/images/icon _location_.svg";
 import temperatureSvg from "../../../assets/images/icon _temperature_.svg";
 import { IWeatherData } from "../../../types";
 import { formatDateForTab } from "../../../helper/date";
+import {
+  WEATHER_DATE_TABS_QUERY_KEY,
+  WEATHER_DATE_TABS_TODAY,
+  WEATHER_TEMPERATURE_QUERY_KEY,
+  dateTabs,
+} from "../../../constants";
 
 interface WeatherProps {
   data: IWeatherData;
@@ -16,64 +22,79 @@ const WeatherCard: FC<WeatherProps> = ({ data }) => {
   const fahrenheit = (data.main.temp * 1.8 - 459.67).toFixed(2);
   const celsius = (data.main.temp - 273.15).toFixed(2);
 
+  const dateTabqueryValue = Number(
+    searchParams.get(WEATHER_DATE_TABS_QUERY_KEY)
+  );
+  const activeTab = dateTabs.find(
+    (tab) => tab.value === dateTabqueryValue
+  )?.value;
+
+  const formattedDate = activeTab
+    ? formatDateForTab(dateTabqueryValue)
+    : formatDateForTab(WEATHER_DATE_TABS_TODAY);
+
   return (
-    <div className="h-[425px] w-full lg:w-[817px] bg-gradient-1 shadow rounded-[32px] mt-[33px] mx-auto select-none hover:scale-105 transition-all duration-300">
-      <div className=" px-7 py-9 flex flex-col justify-between h-full">
-        <div className="flex items-center justify-between gap-2 max-h-max">
-          <div className="flex items-center gap-1">
-            <span className="font-light leading-normal text-[30px] text-white">
-              {data.name}
-            </span>
-            <img
-              src={locationSvg}
-              alt=""
-              className="w-[31px] h-[31px] object-cover"
-            />
-          </div>
-
-          <span className="font-medium leading-normal text-[20px] text-white underline">
-            {formatDateForTab(searchParams.get("date") ? 1 : 0)}
-          </span>
-        </div>
-
-        <div className="flex flex-col items-center justify-center  h-full ">
-          <div className="flex items-center gap-6">
-            <img
-              src={temperatureSvg}
-              alt=""
-              className="w-[18px] h-[62px] object-contain"
-            />
-            <span className="font-medium leading-normal text-[70px] text-white">
-              {searchParams.get("temp") ? fahrenheit + " °F" : celsius + " °C"}
-            </span>
-            <div className="z-20 w-[78px] h-[46px]">
+    <div className="h-72 md:h-[425px] w-full px-3 md:px-10 lg:w-[817px] bg-gradient-1 shadow rounded-[32px] mt-8 mx-auto select-none group overflow-hidden ">
+      <div className="w-full h-full group-hover:scale-105 transition-all duration-300">
+        <div className="px-2 md:px-7 py-4 md:py-9 flex flex-col justify-between h-full">
+          <div className="flex  flex-wrap items-center justify-between gap-2 max-h-max ">
+            <div className="flex items-center gap-1">
+              <span className="font-light leading-normal text-sm md:text-2xl lg:text-[30px] text-white">
+                {data.name}
+              </span>
               <img
-                src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
-                alt="current_weather_status"
-                className="w-full h-full object-cover"
+                src={locationSvg}
+                alt=""
+                className="w-4 h-4 md:w-8 md:h-8 object-cover"
               />
             </div>
-          </div>
-          <span className="font-medium text-xl text-white">
-            {data.weather[0].description}
-          </span>
-        </div>
-        <div className="flex items-center justify-between gap-2 max-h-max">
-          <div className="flex flex-col">
-            <span className="font-medium leading-normal text-[20px] text-white uppercase">
-              Humidity
-            </span>
-            <span className="font-medium leading-normal text-[22px] text-white">
-              {data.main.humidity}%
+
+            <span className="font-medium leading-normal text-sm md:text-base lg:text-xl text-white underline whitespace-nowrap">
+              {formattedDate}
             </span>
           </div>
-          <div className="flex flex-col">
-            <span className="font-medium leading-normal text-[20px] text-white uppercase">
-              WIND
+
+          <div className="flex flex-col items-center justify-center  h-full ">
+            <div className="flex items-center gap-2 md:gap-6">
+              <img
+                src={temperatureSvg}
+                alt=""
+                className="w-4 h-8 md:w-[18px] md:h-[62px] object-contain"
+              />
+              <span className="font-medium leading-normal text-2xl md:text-5xl lg:text-7xl text-white whitespace-nowrap">
+                {searchParams.get(WEATHER_TEMPERATURE_QUERY_KEY)
+                  ? fahrenheit + " °F"
+                  : celsius + " °C"}
+              </span>
+              <div className="z-20 w-10 h-8 md:w-[78px] md:h-[46px]">
+                <img
+                  src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
+                  alt="current_weather_status"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <span className="font-medium text-sm  md:text-base lg:text-xl text-white">
+              {data.weather[0].description}
             </span>
-            <span className="font-medium leading-normal text-[22px] text-white">
-              {data.wind.speed}mph
-            </span>
+          </div>
+          <div className="flex items-center justify-between gap-2 max-h-max">
+            <div className="flex flex-col">
+              <span className="font-medium leading-normal text-sm text-base  lg:text-xl text-white uppercase">
+                Humidity
+              </span>
+              <span className="font-medium leading-normal  text-sm text-base  lg:text-[22px] text-white">
+                {data.main.humidity}%
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-medium leading-normal text-sm text-base  lg:text-xl text-white uppercase">
+                WIND
+              </span>
+              <span className="font-medium leading-normal text-sm text-base  lg:text-[22px] text-white">
+                {data.wind.speed}mph
+              </span>
+            </div>
           </div>
         </div>
       </div>

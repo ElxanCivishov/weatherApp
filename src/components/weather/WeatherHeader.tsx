@@ -8,15 +8,15 @@ interface WeatherHeaderProps {
 
 const WeatherHeader: FC<WeatherHeaderProps> = memo(({ title }) => {
   return (
-    <header className="relative z-30 h-auto w-full">
-      <div className="absolute z-20 left-[5px] top-[20px] w-[57px] h-[34px]">
+    <header className="z-30 h-auto w-full relative">
+      <div className="absolute z-20 left-1 top-5 w-14 h-8">
         <img src={cloudSvg} alt="" className="w-full h-full object-cover" />
       </div>
-      <div className="absolute z-10 left-[25px] top-[7px] bottom-[7px] w-[41px] h-[41px]">
+      <div className="absolute z-10 left-6 top-2 bottom-2 w-10 h-10">
         <img src={sunSvg} alt="" className="w-full h-full object-cover" />
       </div>
-      <div className="pl-[64px] pt-[31px] h-[93px] ">
-        <h2 className="text-[69px] font-normal  leading-normal text-white">
+      <div className="pl-16 pt-8 h-24">
+        <h2 className="text-5xl md:text-6xl  lg:text-[69px] font-normal  leading-normal text-white">
           {title}
         </h2>
       </div>

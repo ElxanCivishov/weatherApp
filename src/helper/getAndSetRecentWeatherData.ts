@@ -1,27 +1,23 @@
 import {
-  RECENT_WEATHER_MAX_SIZE,
+  DEFAULT_RECENT_WEATHER_MAX_SIZE,
   RECENT_WEATHER_STORAGE_KEY,
 } from "../constants";
-
 import { IWeatherData } from "../types";
-
 import { getStorageItem } from "./getLocalStorage";
 import { setStorageItem } from "./setLocalStorage";
 
-export const recentWeatherData = (
+export const getAndSetRecentWeatherData = (
   weatherData: IWeatherData,
-  maxSize: number = RECENT_WEATHER_MAX_SIZE
+  maxSize: number = DEFAULT_RECENT_WEATHER_MAX_SIZE
 ): void => {
-  const recentWeatherData: IWeatherData[] = getStorageItem({
+  const recentWeatherData: IWeatherData[] = getStorageItem<IWeatherData[]>({
     key: RECENT_WEATHER_STORAGE_KEY,
     value: [],
   });
 
-  console.log("recent", weatherData);
-
-  const updatedData: IWeatherData[] = Array.isArray(recentWeatherData)
-    ? [...recentWeatherData.slice(1, maxSize), weatherData]
-    : [weatherData];
+  const updatedData: IWeatherData[] = [...recentWeatherData, weatherData].slice(
+    -maxSize
+  );
 
   setStorageItem({
     key: RECENT_WEATHER_STORAGE_KEY,

@@ -46,12 +46,14 @@ const DisplayWeather = () => {
   }, [isError, message]);
 
   return (
-    <section className="pb-10 overflow-hidden">
-      {isLoading && <ProgressBarLoader isLoading={isLoading} />}
-      <div className="2xl:container mx-auto px-2 md:px-0 pb-10 ">
+    <section className="bg-colorBlack h-full min-h-screen ">
+      <div className="2xl:container 2xl:mx-auto px-5 md:px-0 pb-10">
+        {isLoading && <ProgressBarLoader isLoading={isLoading} />}
         <WeatherHeader title="Hotlify" />
-        <div className="flex flex-col md:flex-row md:items-center mt-12 ">
+        <div className="mt-4 md:mt-12 ">
           <WeatherSwitchTemp />
+        </div>
+        <div className="flex items-center justify-center  md:-mt-10">
           <WeatherSwitchDay />
         </div>
         <Search />

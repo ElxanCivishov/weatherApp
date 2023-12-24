@@ -1,7 +1,11 @@
 import { FC, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IWeatherSwitchDay } from "../../types";
-import { WEATHER_DATE_TABS_QUERY_KEY, dateTabs } from "../../constants";
+import {
+  WEATHER_DATE_TABS_QUERY_KEY,
+  WEATHER_DATE_TABS_TODAY,
+  dateTabs,
+} from "../../constants";
 
 const WeatherSwitchDay: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,7 +16,7 @@ const WeatherSwitchDay: FC = () => {
   );
 
   const handleChangeDay = ({ field, value }: IWeatherSwitchDay): void => {
-    if (!value) {
+    if (!value || value === WEATHER_DATE_TABS_TODAY) {
       searchParams.delete(field);
     } else {
       searchParams.set(field, String(value));
@@ -24,21 +28,22 @@ const WeatherSwitchDay: FC = () => {
     <div className="flex  items-center justify-center flex-auto pb-[7px] border- mt-4 md:mt-0  select-none">
       {dateTabs.map((tab, index) => (
         <div
+          key={tab.id}
           className={`
       inline-flex px-4 items-center gap-4 flex-shrink-0 border-b-4 trasition-all duration-300
       ${
-        (!dateTab && index === 0) || dateTab === tab.value
+        (!dateTab && index === 0) || dateTab === tab.value.toString()
           ? "border-colorLightGreen text-colorLightGreen"
-          : "border-transparent text-colorLight"
+          : "border-colorLight text-colorLight"
       } 
     `}
         >
           <span
-            className=" font-medium text-[32px] uppercase leading-9 tracking-wider cursor-pointer"
+            className="font-medium  text-xl md:text-[32px] uppercase leading-9 tracking-wider cursor-pointer"
             onClick={() =>
               handleChangeDay({
                 field: WEATHER_DATE_TABS_QUERY_KEY,
-                value: tab.value.toString().trim(),
+                value: tab.value,
               })
             }
           >
