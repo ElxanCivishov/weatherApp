@@ -1,30 +1,62 @@
-# React + TypeScript + Vite
+# Current Temperature - Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Current Temperature Weather App, for real-time weather updates.  Current temperature, weather conditions, and more.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Awesome Weather App
 
-## Expanding the ESLint configuration
+![App Screenshot](./docs/screenshot.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+### Installation
+1. Clone the repository:
+```bash
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+git clone https://github.com/ElxanCivishov/weatherApp.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Scripts](#scripts)
+- [Redux Toolkit](#redux-toolkit)
+- [Styling with Chakra UI](#styling-with-chakra-ui)
+- [Linting and Formatting](#linting-and-formatting)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Introduction
+
+Awesome Weather App is a modern web application built with React, Redux Toolkit, TypeScript, Vite, and styled with Chakra UI. It provides real-time weather updates with a clean and user-friendly interface.
+
+## Features
+
+- Real-time weather data
+- Location-based weather updates
+- Temperature units toggle (Celsius/Fahrenheit)
+- Responsive design for various devices
+- Recent searches for quick access
+- User-friendly and intuitive interface
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Node.js: [https://nodejs.org/](https://nodejs.org/)
+- npm: [https://www.npmjs.com/](https://www.npmjs.com/)
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/awesome-weather-app.git
