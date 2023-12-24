@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "../app/config";
+import { axiosInstance, axiosInstanceForWeekDays } from "../app/config";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { IWeatherState } from "../types";
+import { WEATHER_DATA_WEEK_DAY_COUNT } from "../constants";
 
 const appid = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
@@ -10,6 +11,27 @@ export const getWeatherData = createAsyncThunk(
   async (query: string, thunkAPI) => {
     try {
       const response = await axiosInstance.get(`?q=${query}&appid=${appid}`);
+
+      return response.data;
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getWeatherDataWeekDays = createAsyncThunk(
+  "weather/getWeatherDataWeekDays",
+  async (query: string, thunkAPI) => {
+    try {
+      const response = await axiosInstanceForWeekDays.get(
+        `?q=${query}&appid=${appid}&cnt=${WEATHER_DATA_WEEK_DAY_COUNT}`
+      );
 
       return response.data;
     } catch (error: any) {
@@ -55,6 +77,23 @@ export const weatherSlice = createSlice({
       })
       .addCase(
         getWeatherData.rejected,
+        (state, { payload }: PayloadAction<any>) => {
+          state.isLoading = false;
+          state.isError = true;
+          state.message = payload;
+        }
+      )
+      .addCase(getWeatherDataWeekDays.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getWeatherDataWeekDays.fulfilled, (state, { payload }) => {
+        const { list, city, ...rest } = payload;
+        state.isLoading = false;
+        state.isError = false;
+        state.data = { ...rest, ...city, ...list[1] };
+      })
+      .addCase(
+        getWeatherDataWeekDays.rejected,
         (state, { payload }: PayloadAction<any>) => {
           state.isLoading = false;
           state.isError = true;

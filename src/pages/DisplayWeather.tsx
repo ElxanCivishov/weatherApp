@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { DEFAULT_CITY } from "../constants";
+import { DEFAULT_CITY, WEATHER_DATE_TABS_QUERY_KEY } from "../constants";
 import { IAlertState, IWeatherState } from "../types";
 
 import { Alert, ProgressBarLoader } from "../partials";
@@ -19,12 +18,15 @@ import { Search } from "../components";
 import {
   RESET as RESET_WEATHER_STATE,
   getWeatherData,
+  getWeatherDataWeekDays,
 } from "../features/weatherSlice";
+import { useSearchParams } from "react-router-dom";
+import { SkeletonWeatherCard } from "../components/skeleton";
 
 const DisplayWeather = () => {
   const dispatch = useAppDispatch();
-  const [searchParams] = useSearchParams();
   const showAlert = useAlert();
+  const [searchParams] = useSearchParams();
 
   const { message: alertMsg } = useAppSelector<IAlertState>(
     (state) => state.alert
@@ -33,10 +35,13 @@ const DisplayWeather = () => {
     (state) => state.weatherData
   );
 
-  //get default or  weather data when click recent card
   useEffect(() => {
-    dispatch(getWeatherData(searchParams.get("query") || DEFAULT_CITY));
-  }, [searchParams.get("query")]);
+    if (searchParams.get(WEATHER_DATE_TABS_QUERY_KEY)) {
+      dispatch(getWeatherDataWeekDays(data?.name || DEFAULT_CITY));
+    } else {
+      dispatch(getWeatherData(data?.name || DEFAULT_CITY));
+    }
+  }, [searchParams.get(WEATHER_DATE_TABS_QUERY_KEY)]);
 
   useEffect(() => {
     if (message && isError) {
@@ -57,7 +62,12 @@ const DisplayWeather = () => {
           <WeatherSwitchDay />
         </div>
         <Search />
-        {data && <WeatherCard data={data} />}
+
+        {isLoading && !data ? (
+          <SkeletonWeatherCard />
+        ) : (
+          data && <WeatherCard data={data} />
+        )}
         <WeatherRecents />
       </div>
 

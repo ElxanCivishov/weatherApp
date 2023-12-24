@@ -5,12 +5,17 @@ import { Alert } from "../partials";
 import useAlert from "../helper/useAlert";
 import { IAlertState } from "../types";
 import { getAndSetRecentWeatherData } from "../helper/getAndSetRecentWeatherData";
-import { getWeatherData } from "../features/weatherSlice";
+import {
+  getWeatherData,
+  getWeatherDataWeekDays,
+} from "../features/weatherSlice";
+import { useSearchParams } from "react-router-dom";
+import { WEATHER_DATE_TABS_QUERY_KEY } from "../constants";
 
 const Search: FC = () => {
   const dispatch = useAppDispatch();
   const showAlert = useAlert();
-
+  const [searchParams] = useSearchParams();
   const [city, setCity] = useState<string>("");
   const { message: alertMsg } = useAppSelector<IAlertState>(
     (state) => state.alert
@@ -25,12 +30,22 @@ const Search: FC = () => {
 
     if (!city) {
       showAlert("Enter city or country name");
-    } else {
-      const data = await dispatch(getWeatherData(city));
+      return;
+    }
+
+    try {
+      const isWeekDays = Boolean(searchParams.get(WEATHER_DATE_TABS_QUERY_KEY));
+      const data = isWeekDays
+        ? await dispatch(getWeatherDataWeekDays(city))
+        : await dispatch(getWeatherData(city));
+
       if (data.payload.cod === 200) {
         getAndSetRecentWeatherData(data.payload);
       }
+
       setCity("");
+    } catch (error) {
+      showAlert(String(error));
     }
   };
 

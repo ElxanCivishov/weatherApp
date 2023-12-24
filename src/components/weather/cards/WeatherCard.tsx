@@ -3,13 +3,13 @@ import { useSearchParams } from "react-router-dom";
 import locationSvg from "../../../assets/images/icon _location_.svg";
 import temperatureSvg from "../../../assets/images/icon _temperature_.svg";
 import { IWeatherData } from "../../../types";
-import { formatDateForTab } from "../../../helper/date";
 import {
   WEATHER_DATE_TABS_QUERY_KEY,
-  WEATHER_DATE_TABS_TODAY,
   WEATHER_TEMPERATURE_QUERY_KEY,
   dateTabs,
 } from "../../../constants";
+import { convertDateTimeAgo } from "../../../helper/useDateFns";
+import { addDays } from "date-fns";
 
 interface WeatherProps {
   data: IWeatherData;
@@ -30,8 +30,8 @@ const WeatherCard: FC<WeatherProps> = ({ data }) => {
   )?.value;
 
   const formattedDate = activeTab
-    ? formatDateForTab(dateTabqueryValue)
-    : formatDateForTab(WEATHER_DATE_TABS_TODAY);
+    ? convertDateTimeAgo(addDays(new Date(), 1))
+    : convertDateTimeAgo(new Date());
 
   return (
     <div className="h-72 md:h-[425px] w-full px-3 md:px-10 lg:w-[817px] bg-gradient-1 shadow rounded-[32px] mt-8 mx-auto select-none group overflow-hidden ">

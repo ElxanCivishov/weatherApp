@@ -2,7 +2,6 @@ import { FC } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IWeatherData } from "../../../types";
 import {
-  WEATHER_QUERY_KEY,
   WEATHER_TEMPERATURE_FAHRENHEIT,
   WEATHER_TEMPERATURE_QUERY_KEY,
 } from "../../../constants";
@@ -12,7 +11,7 @@ interface WeatherProps {
 }
 
 const WeatherRecentCard: FC<WeatherProps> = ({ data }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const fahrenheit = Math.round(data.main.temp * 1.8 - 459.67);
   const celsius = Math.round(data.main.temp - 273.15);
 
@@ -22,16 +21,8 @@ const WeatherRecentCard: FC<WeatherProps> = ({ data }) => {
       ? fahrenheit + " °F"
       : celsius + " °C";
 
-  const handleClickRecent = (query: string) => {
-    searchParams.set(WEATHER_QUERY_KEY, query);
-    setSearchParams(searchParams, { replace: true });
-  };
-
   return (
-    <div
-      onClick={() => handleClickRecent(data.name)}
-      className="h-40 md:h-52 lg:h-60 w-full bg-gradient-2 rounded-2xl md:rounded-[2rem]  relative  hover:-translate-y-2 transition-all duration-200 select-none cursor-pointer"
-    >
+    <div className="h-40 md:h-52 lg:h-60 w-full bg-gradient-2 rounded-2xl md:rounded-[2rem]  relative  hover:-translate-y-2 transition-all duration-200 select-none ">
       <div className="w-full  flex flex-col justify-between py-4 h-full">
         <div className="py-1 lg:py-3 px-1 w-full text-center">
           <span className="font-medium leading-normal text-sm md:text-base lg:text-xl  text-white">
