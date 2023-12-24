@@ -34,8 +34,8 @@ const WeatherCard: FC<WeatherProps> = ({ data }) => {
     : convertDateTimeAgo(new Date());
 
   return (
-    <div className="w-full px-3 md:px-10 mt-8  select-none group overflow-hidden">
-      <div className="h-72 md:h-[425px] w-full px-3 md:px-10 mx-auto  lg:w-[817px] bg-gradient-1 shadow rounded-[32px] ">
+    <div className="w-full  md:px-10 mt-8  select-none shadow bg-gradient-1 group rounded-[32px] overflow-hidden ">
+      <div className="h-72 md:h-[425px] w-full px-5 md:px-10 mx-auto  lg:w-[817px]   ">
         <div className="w-full h-full group-hover:scale-105 transition-all duration-300">
           <div className="px-2 md:px-7 py-4 md:py-9 flex flex-col justify-between h-full">
             <div className="flex  flex-wrap items-center justify-between gap-2 max-h-max ">
