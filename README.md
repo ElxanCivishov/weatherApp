@@ -5,7 +5,7 @@
 ![App Screenshot](./public/snapWeather.png)
 
 ## Introduction
-Awesome Weather App is a modern web application built with React, Redux Toolkit, TypeScript, Vite, and Tailwind CSS. 
+Weather App is web application built with React, Redux Toolkit, TypeScript, Vite, and Tailwind CSS. 
 
 It provides real-time weather updates with a clean and user-friendly interface.
 
