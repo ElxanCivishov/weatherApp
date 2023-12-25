@@ -2,6 +2,10 @@ export interface IMeta {
   title: string;
 }
 
+export interface IErrorBoundary {
+  error: string;
+}
+
 export interface IWeather {
   description: string;
   icon: string;

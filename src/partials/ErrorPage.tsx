@@ -1,15 +1,8 @@
 import { FC } from "react";
 import { Meta } from ".";
+import { IErrorBoundary } from "../types";
 
-interface ProductsFetchingErrorProps {
-  error: string;
-  resetErrorBoundary?: () => void;
-}
-
-const ErrorPage: FC<ProductsFetchingErrorProps> = ({
-  error,
-  resetErrorBoundary,
-}) => {
+const ErrorPage: FC<IErrorBoundary> = ({ error }) => {
   return (
     <>
       <Meta title="Error" />
@@ -23,16 +16,6 @@ const ErrorPage: FC<ProductsFetchingErrorProps> = ({
             <p className="text-sm text-white font-semibold ">
               <b className="me-2 text-base"> Error: </b> {error}
             </p>
-            {resetErrorBoundary && (
-              <div className="flex items-center justify-center">
-                <button
-                  onClick={() => resetErrorBoundary()}
-                  className="p-2 text-xs md:text-base md:p-3 font-medium text-center rounded-full no-underline bg-colorBlack hover:bg-white text-white hover:text-zinc-800 border-0 w-40 md:w-48"
-                >
-                  Reset page
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </section>
