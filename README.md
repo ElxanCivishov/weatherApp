@@ -21,7 +21,6 @@ It provides real-time weather updates with a clean and user-friendly interface.
 ## Packages Used
 
 
-<!-- prettier-ignore -->
 | Name                  | Links | Description |
 |-----------------------| ------| ----------- |
 | ReactJs               | [React](https://reactjs.org/) | React is a free and open-source front-end JavaScript library for building user interfaces based on UI components.|
@@ -34,6 +33,28 @@ It provides real-time weather updates with a clean and user-friendly interface.
 
 
 
+## Project Structure
+Explain the structure of your project, detailing the purpose of each important file and folder.
+
+ ```bash
+src/                  # Root directory for the source code
+|-- app/              # Redux Toolkit store setup
+|-- assets/           # Images and other assets
+|-- components/       # Reusable React components
+|-- features/         # Redux Toolkit Slices for application features
+|-- helper/           # Helper modules
+|-- pages/            # React pages
+|-- partials/         # Partial components
+|-- routes/           # Application routes
+|-- types/            # TypeScript type definitions (Prop types)
+|-- utils/            # Utility functions
+|-- App.tsx/          # Main application component
+|-- index.tsx/        # Entry point
+|-- constants/        # Constants and variables
+|-- global.d.ts/      # Global TypeScript declarations
+|-- index.css/        # Main stylesheet
+
+```
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
