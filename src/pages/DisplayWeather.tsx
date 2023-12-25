@@ -53,9 +53,9 @@ const DisplayWeather = () => {
   return (
     <>
       <Meta title="Weather" />
+      {isLoading && <ProgressBarLoader isLoading={isLoading} />}
       <section className="bg-colorBlack h-full min-h-screen ">
-        <div className="2xl:container 2xl:mx-auto px-5 md:px-0 pb-10">
-          {isLoading && <ProgressBarLoader isLoading={isLoading} />}
+        <div className="container mx-auto px-5 pb-10">
           <WeatherHeader title="Hotlify" />
           <div className="mt-4 md:mt-12 ">
             <WeatherSwitchTemp />
