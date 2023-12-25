@@ -16,14 +16,11 @@ const WeatherRecents: FC = () => {
     setRecents(weathers);
   }, [localStorage.getItem(RECENT_WEATHER_STORAGE_KEY)]);
 
-  // Maybe the names wanted to be repeated so I give you a new date together with id
+  // Maybe the names wanted to be repeated when recent search so I give you a new date together with id
   return (
-    <div className="grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16 px-10 mt-12">
+    <div className="grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16 px-10 lg:px-20 mt-12">
       {recents.map((data, index) => (
-        <WeatherRecentCard
-          key={data.id + Date.now() + index + data.name}
-          data={data}
-        />
+        <WeatherRecentCard key={data.id + Date.now() + index} data={data} />
       ))}
     </div>
   );
